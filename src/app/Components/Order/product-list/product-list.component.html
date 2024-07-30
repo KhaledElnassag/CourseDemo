@@ -1,0 +1,28 @@
+
+<table class="table">
+    <thead >
+        <tr >
+        <th scope="col" >Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Image</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr *ngFor="let prod of productList" [class.d-none]="false"> -->
+      <tr *ngFor="let prod of productListVm">
+        <td [class.bg-dark]="prod.quantity==0" [class.text-white]="prod.quantity==0">{{prod?.id}}</td>
+        <td>{{prod?.name}}</td>
+        <td><img LightBox="red" src="{{prod?.imgUrl}}" alt="" style="width: 100px;height: 70px;"></td>
+        <td>{{prod?.quantity}}</td>
+        <td>{{prod?.price}}</td>
+        <!-- <td><input #CountId type="number" class="form-control" [(ngModel)]="cnt"></td> -->
+        <td><input #CountId type="number" class="form-control" [(ngModel)]="cnt"></td>
+        <td><div class="btn btn-primary" (click)="Buy(prod.id,CountId.value)">Toggle</div></td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <!-- <h1>{{cnt}}</h1> -->

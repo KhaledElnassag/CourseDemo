@@ -1,0 +1,8 @@
+<img *ngIf="isShow" [src]="storeData.imgUrl" alt="" class="img-fluid">
+<div class="btn btn-primary" (click)="Toggle()">Toggle</div>
+<h1 #TagId>{{storeData.name}}</h1>
+<ul>
+    <li *ngFor="let item of storeData.branches">
+        {{item}}
+    </li>
+</ul>
