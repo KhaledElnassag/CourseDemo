@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterViewChecked, Component, DoCheck, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { AfterContentChecked, AfterViewChecked, Component, DoCheck, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { ICategory } from 'src/app/Models/icategory';
 import { IProduct } from 'src/app/Models/iproduct';
 
@@ -13,6 +13,7 @@ productListVm:IProduct[];
 
 cnt:number=0;
 @Input() CatId:number=0;
+@Output() event:EventEmitter<number>=new EventEmitter<number>();
 constructor() {
 this.productList=[
   {id:1,name:'Laptop',price:100,quantity:1,imgUrl:'https://picsum.photos/400/300',categoryId:1},
@@ -25,22 +26,25 @@ this.productListVm=this.productList
 
 }
   ngDoCheck(): void {
-    debugger
+    
     }
   ngAfterContentChecked(): void {
-    debugger
+    
   }
   ngAfterViewChecked(): void {
-    debugger
+    
   }
   ngOnChanges(changes: SimpleChanges): void {
     debugger;
     this.GetProductByCat();
   }
 Buy(id:number,count:string){
+  debugger;
   let prod=this.productList.find(p=>p.id==id);
   if(prod!= null){
     prod.quantity-=(+count);
+    var TotalPrice=(+count)*prod.price;
+    this.event.emit(TotalPrice);
   }
 }
 GetProductByCat(){
