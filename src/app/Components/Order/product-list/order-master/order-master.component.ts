@@ -22,7 +22,6 @@ export class OrderMasterComponent implements AfterViewInit,AfterViewChecked {
   }
   ngAfterViewChecked(): void {
     debugger;
-    this.CllientInput.nativeElement.value=this.ProdInput.productList[0].name;
   }
   ngAfterViewInit(): void {
 

@@ -1,6 +1,7 @@
 import { AfterContentChecked, AfterViewChecked, Component, DoCheck, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { ICategory } from 'src/app/Models/icategory';
 import { IProduct } from 'src/app/Models/iproduct';
+import { StaticProductsService } from 'src/app/Services/static-products.service';
 
 @Component({
   selector: 'app-product-list',
@@ -8,21 +9,15 @@ import { IProduct } from 'src/app/Models/iproduct';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnChanges,AfterContentChecked,AfterViewChecked,DoCheck {
-productList:IProduct[];
+// productList:IProduct[];
 productListVm:IProduct[];
 
 cnt:number=0;
 @Input() CatId:number=0;
 @Output() event:EventEmitter<number>=new EventEmitter<number>();
-constructor() {
-this.productList=[
-  {id:1,name:'Laptop',price:100,quantity:1,imgUrl:'https://picsum.photos/400/300',categoryId:1},
-  {id:2,name:' Hp Laptop',price:200,quantity:0,imgUrl:'https://picsum.photos/400/300',categoryId:3},
-  {id:3,name:'Lenovo Laptop',price:1000,quantity:10,imgUrl:'https://picsum.photos/400/300',categoryId:1},
-  {id:4,name:'apple Laptop',price:300,quantity:15,imgUrl:'https://picsum.photos/400/300',categoryId:2},
-  {id:5,name:'Sams Laptop',price:500,quantity:12,imgUrl:'https://picsum.photos/400/300',categoryId:3}
-];
-this.productListVm=this.productList
+constructor(private prodService:StaticProductsService) {
+
+this.productListVm=prodService.GetAllProd();
 
 }
   ngDoCheck(): void {
@@ -36,19 +31,16 @@ this.productListVm=this.productList
   }
   ngOnChanges(changes: SimpleChanges): void {
     debugger;
-    this.GetProductByCat();
+    this.productListVm=this.prodService.GetProductByCat(this.CatId);
   }
 Buy(id:number,count:string){
   debugger;
-  let prod=this.productList.find(p=>p.id==id);
+  let prod=this.prodService.GetProdById(id);
   if(prod!= null){
     prod.quantity-=(+count);
     var TotalPrice=(+count)*prod.price;
     this.event.emit(TotalPrice);
   }
 }
-GetProductByCat(){
-  debugger
-  this.productListVm=this.productList.filter(p=>(this.CatId==0||p.categoryId==this.CatId))
-}
+
 }
