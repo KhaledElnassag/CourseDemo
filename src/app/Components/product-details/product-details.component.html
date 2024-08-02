@@ -1,1 +1,19 @@
-<p>product-details works!</p>
+<div class="card m-2" style="width: 30%;" >
+    <img [src]="product?.imgUrl" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{product?.name}}</h5>
+      <div class="card-text">
+        <div>Price: {{product?.price}}</div>
+        <div>Quantity: {{product?.quantity}}</div>
+      </div>
+      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+        <!-- <button [disabled]="curProId==prodIds[0]" type="button" class="btn btn-danger"  (click)="prevProduct()">Previous</button> -->
+        <button  type="button" class="btn btn-danger"  (click)="prevProduct()">Previous</button>
+        <button type="button" class="btn btn-warning" (click)="onClick()">Back</button>
+        <button  type="button" class="btn btn-success" (click)="nextProd()">Next</button>
+        <!-- <button [disabled]="curProId==prodIds[prodIds.length-1]" type="button" class="btn btn-success" (click)="nextProd()">Next</button> -->
+      </div>
+  
+  <!-- <a class="btn btn-secondary" (click)="onClick()" role="button">Back</a> -->
+    </div>
+  </div>
