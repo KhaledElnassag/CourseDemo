@@ -1,4 +1,5 @@
 import { AfterContentChecked, AfterViewChecked, Component, DoCheck, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICategory } from 'src/app/Models/icategory';
 import { IProduct } from 'src/app/Models/iproduct';
 import { StaticProductsService } from 'src/app/Services/static-products.service';
@@ -15,7 +16,7 @@ productListVm:IProduct[];
 cnt:number=0;
 @Input() CatId:number=0;
 @Output() event:EventEmitter<number>=new EventEmitter<number>();
-constructor(private prodService:StaticProductsService) {
+constructor(private prodService:StaticProductsService,private routeService:Router) {
 
 this.productListVm=prodService.GetAllProd();
 
@@ -42,5 +43,8 @@ Buy(id:number,count:string){
     this.event.emit(TotalPrice);
   }
 }
-
+ShowDetails(id:number){
+  // this.routeService.navigate(['Products',id],{queryParams:{Name:'khaled'}});
+  this.routeService.navigate(['Products',id]);
+}
 }

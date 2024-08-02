@@ -8,6 +8,8 @@
         <th scope="col">Quantity</th>
         <th scope="col">Price</th>
         <th scope="col">Count</th>
+        <th scope="col">Details</th>
+        <th scope="col">Buy</th>
       </tr>
     </thead>
     <tbody>
@@ -20,7 +22,9 @@
         <td>{{prod?.price}}</td>
         <!-- <td><input #CountId type="number" class="form-control" [(ngModel)]="cnt"></td> -->
         <td><input #CountId type="number" class="form-control" ></td>
-        <td><div class="btn btn-primary" (click)="Buy(prod.id,CountId.value)">Toggle</div></td>
+        <!-- <td><div class="btn btn-primary" (click)="ShowDetails(prod.id)">View</div></td> -->
+        <td><div class="btn btn-primary" [routerLink]="['/Products',prod.id]" >View</div></td>
+        <td><div class="btn btn-primary" (click)="Buy(prod.id,CountId.value)">Buy</div></td>
       </tr>
       
     </tbody>
