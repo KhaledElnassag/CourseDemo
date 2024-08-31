@@ -15,7 +15,11 @@ const routes: Routes = [
     {path:'Home',component:HomeComponent},
     {path:'Products',component:ProductListComponent},
     {path:'Products/:pid',component:ProductDetailsComponent},
-    {path:'Order',component:OrderMasterComponent,canActivate:[authGuardGuard]}
+    {path:'Order',component:OrderMasterComponent,canActivate:[authGuardGuard]},
+    {
+      path: 'User', 
+      loadChildren: () => import('./Components/UserModule/UserModule.module').then(m => m.UserModuleModule)
+    },
   ]}
   ,
   {path:'Login',component:LoginComponent},
